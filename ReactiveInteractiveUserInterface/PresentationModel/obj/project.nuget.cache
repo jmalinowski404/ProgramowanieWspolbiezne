@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "wG5p6WNA+bc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kuba\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Kuba\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
