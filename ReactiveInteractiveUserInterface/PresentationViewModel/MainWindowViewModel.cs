@@ -8,6 +8,7 @@
 //__________________________________________________________________________________________
 
 using System;
+using System.Windows.Input;
 using System.Collections.ObjectModel;
 using TP.ConcurrentProgramming.Presentation.Model;
 using TP.ConcurrentProgramming.Presentation.ViewModel.MVVMLight;
@@ -26,7 +27,9 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
     {
       ModelLayer = modelLayerAPI == null ? ModelAbstractApi.CreateModel() : modelLayerAPI;
       Observer = ModelLayer.Subscribe<ModelIBall>(x => Balls.Add(x));
-    }
+
+      StartCommand = new RelayCommand(StartSimulation);
+     }
 
     #endregion ctor
 
@@ -43,6 +46,32 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
     public ObservableCollection<ModelIBall> Balls { get; } = new ObservableCollection<ModelIBall>();
 
     #endregion public API
+
+    #region Properties & Commands (DODANE DLA XAML)
+
+    private int _numberOfBalls = 5;
+
+    public int NumberOfBalls
+    {
+      get => _numberOfBalls;
+      set
+      {
+        if (_numberOfBalls != value)
+        {
+          _numberOfBalls = value;
+          RaisePropertyChanged(nameof(NumberOfBalls));
+        }
+      }
+    }
+
+    public ICommand StartCommand { get; }
+
+    private void StartSimulation()
+    {
+       Start(NumberOfBalls);
+    }
+
+    #endregion Properties & Commands
 
     #region IDisposable
 

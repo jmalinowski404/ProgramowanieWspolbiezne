@@ -8,6 +8,8 @@
 //
 //_____________________________________________________________________________________________________________________________________
 
+using System.ComponentModel;
+
 namespace TP.ConcurrentProgramming.BusinessLogic
 {
   public abstract class BusinessLogicAbstractAPI : IDisposable
@@ -58,8 +60,8 @@ namespace TP.ConcurrentProgramming.BusinessLogic
     double y { get; init; }
   }
 
-  public interface IBall 
-  {
+  public interface IBall
+    {
     event EventHandler<IPosition> NewPositionNotification;
   }
 }

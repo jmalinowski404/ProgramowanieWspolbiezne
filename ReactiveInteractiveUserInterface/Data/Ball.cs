@@ -8,6 +8,8 @@
 //
 //_____________________________________________________________________________________________________________________________________
 
+using System.ComponentModel;
+
 namespace TP.ConcurrentProgramming.Data
 {
   internal class Ball : IBall
@@ -20,19 +22,18 @@ namespace TP.ConcurrentProgramming.Data
       Velocity = initialVelocity;
     }
 
-    #endregion ctor
+        #endregion ctor
 
-    #region IBall
+        #region IBall
 
-    public event EventHandler<IVector>? NewPositionNotification;
+        public event EventHandler<IVector>? NewPositionNotification;
 
     public IVector Velocity { get; set; }
+    public IVector Position { get; set; }
 
     #endregion IBall
 
     #region private
-
-    private Vector Position;
 
     private void RaiseNewPositionChangeNotification()
     {
