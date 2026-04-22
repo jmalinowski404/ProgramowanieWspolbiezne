@@ -47,6 +47,22 @@ namespace TP.ConcurrentProgramming.Data
       MoveTimer.Change(0, 25);
     }
 
+    public override void Pause()
+        {
+            if (Disposed)
+               throw new ObjectDisposedException(nameof(DataImplementation));
+                
+            MoveTimer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+
+        public override void Resume()
+        {
+            if (Disposed)
+               throw new ObjectDisposedException(nameof(DataImplementation));
+
+            MoveTimer.Change(0, 16);
+        }
+
     #endregion DataAbstractAPI
 
     #region IDisposable

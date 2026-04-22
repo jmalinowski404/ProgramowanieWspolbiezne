@@ -49,6 +49,16 @@ namespace TP.ConcurrentProgramming.Presentation.Model
       layerBellow.Start(numberOfBalls, StartHandler);
     }
 
+        public override void Pause()
+        {
+            layerBellow.Pause();
+        }
+
+        public override void Resume()
+        {
+            layerBellow.Resume();
+        }
+
     #endregion ModelAbstractApi
 
     #region API

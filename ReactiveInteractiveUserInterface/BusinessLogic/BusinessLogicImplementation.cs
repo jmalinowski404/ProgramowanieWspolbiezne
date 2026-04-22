@@ -62,6 +62,22 @@ namespace TP.ConcurrentProgramming.BusinessLogic
       );
     }
 
+        public override void Pause()
+        {
+            if (Disposed)
+                throw new ObjectDisposedException(nameof(BusinessLogicImplementation));
+
+            layerBellow.Pause();
+        }
+
+        public override void Resume()
+        {
+            if (Disposed)
+                throw new ObjectDisposedException(nameof(BusinessLogicImplementation));
+
+            layerBellow.Resume();
+        }
+
     #endregion BusinessLogicAbstractAPI
 
     #region private

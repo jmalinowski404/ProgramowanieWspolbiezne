@@ -25,6 +25,10 @@ namespace TP.ConcurrentProgramming.Data
 
     public abstract void Start(int numberOfBalls, Action<IVector, IBall> upperLayerHandler);
 
+    public abstract void Pause();
+
+    public abstract void Resume();
+
     #endregion public API
 
     #region IDisposable

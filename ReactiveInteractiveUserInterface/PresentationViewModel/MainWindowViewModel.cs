@@ -8,15 +8,17 @@
 //__________________________________________________________________________________________
 
 using System;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using TP.ConcurrentProgramming.Presentation.Model;
 using TP.ConcurrentProgramming.Presentation.ViewModel.MVVMLight;
 using ModelIBall = TP.ConcurrentProgramming.Presentation.Model.IBall;
 
 namespace TP.ConcurrentProgramming.Presentation.ViewModel
 {
-  public class MainWindowViewModel : ViewModelBase, IDisposable
+  public class MainWindowViewModel : ViewModelBase, IDisposable, INotifyPropertyChanged
   {
     #region ctor
 
@@ -29,6 +31,7 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
       Observer = ModelLayer.Subscribe<ModelIBall>(x => Balls.Add(x));
 
       StartCommand = new RelayCommand(StartSimulation);
+       PauseCommand = new RelayCommand(PauseSimulation);
      }
 
     #endregion ctor
@@ -41,6 +44,18 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
         throw new ObjectDisposedException(nameof(MainWindowViewModel));
       ModelLayer.Start(numberOfBalls);
       Observer.Dispose();
+    }
+
+    public void Pause()
+        {
+            if (Disposed)
+                throw new ObjectDisposedException(nameof(MainWindowViewModel));
+            ModelLayer.Pause();
+        }
+
+    public void Resume() 
+    { 
+        ModelLayer.Resume();
     }
 
     public ObservableCollection<ModelIBall> Balls { get; } = new ObservableCollection<ModelIBall>();
@@ -65,10 +80,30 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
     }
 
     public ICommand StartCommand { get; }
+    public ICommand PauseCommand { get; }
 
     private void StartSimulation()
     {
        Start(NumberOfBalls);
+
+       IsRunning = true;
+    }
+
+    private void PauseSimulation()
+    {
+        if (IsRunning) {
+            Pause();
+            IsRunning = false;
+        } else {
+            ResumeSimulation();
+        }
+    }
+
+    private void ResumeSimulation()
+    {
+        Resume();
+
+        IsRunning = true;
     }
 
     #endregion Properties & Commands
@@ -100,6 +135,20 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
       GC.SuppressFinalize(this);
     }
 
+    public bool IsRunning
+    {
+        get => isRunning;
+        set
+        {
+            isRunning = value;
+
+            OnPropertyChanged(nameof(IsRunning));
+            OnPropertyChanged(nameof(ActionButtonText));
+        }
+    }
+
+    public string ActionButtonText => IsRunning ? "Pause" : "Resume";
+
     #endregion IDisposable
 
     #region private
@@ -107,7 +156,17 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
     private IDisposable Observer = null;
     private ModelAbstractApi ModelLayer;
     private bool Disposed = false;
+    private bool isRunning = false;
 
     #endregion private
+
+    #region INotifyPropertyChanged
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+    #endregion
   }
 }

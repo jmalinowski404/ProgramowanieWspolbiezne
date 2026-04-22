@@ -25,6 +25,9 @@
 
             <Button Content="Start" Width="80" Padding="5" 
                     Command="{Binding StartCommand}" />
+
+            <Button Content="{Binding ActionButtonText}" Width="80" Padding="5" Margin="10,0,0,0"
+                    Command="{Binding PauseCommand}" />
         </StackPanel>
 
         <Border Grid.Row="1" BorderThickness="4" BorderBrush="Green" HorizontalAlignment="Center" VerticalAlignment="Center">
