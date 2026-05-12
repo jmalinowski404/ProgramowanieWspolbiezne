@@ -8,6 +8,8 @@
 //
 //_____________________________________________________________________________________________________________________________________
 
+using System.Diagnostics;
+
 namespace TP.ConcurrentProgramming.BusinessLogic
 {
   internal class Ball : IBall
@@ -16,6 +18,8 @@ namespace TP.ConcurrentProgramming.BusinessLogic
     {
             ball.NewPositionNotification += (sender, newPosition) =>
             {
+                Debug.WriteLine($"BusinessBall: Data->Business event for dataHash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sender)} pos=({newPosition.x},{newPosition.y})");
+        
                 RaisePositionChangeEvent(this, newPosition);
             };
     }
@@ -30,6 +34,8 @@ namespace TP.ConcurrentProgramming.BusinessLogic
 
     private void RaisePositionChangeEvent(object? sender, Data.IVector e)
     {
+      Debug.WriteLine($"BusinessBall: Raising Business NewPositionNotification pos=({e.x},{e.y})");
+      
       NewPositionNotification?.Invoke(this, new Position(e.x, e.y));
     }
 

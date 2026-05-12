@@ -2,16 +2,12 @@
 //
 //  Copyright (C) 2023, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community by pressing the `Watch` button and get started commenting using the discussion panel at
-//
-//  https://github.com/mpostol/TP/discussions/182
-//
-//  by introducing yourself and telling us what you do with this community.
-//_____________________________________________________________________________________________________________________________________
+//____________________________________________________________________________________________________________________________________
 
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using TP.ConcurrentProgramming.BusinessLogic;
 using LogicIBall = TP.ConcurrentProgramming.BusinessLogic.IBall;
 
@@ -23,6 +19,7 @@ namespace TP.ConcurrentProgramming.Presentation.Model
     {
       TopBackingField = top;
       LeftBackingField = left;
+      syncContext = SynchronizationContext.Current;
       underneathBall.NewPositionNotification += NewPositionNotification;
     }
 
@@ -66,14 +63,39 @@ namespace TP.ConcurrentProgramming.Presentation.Model
 
     private double TopBackingField;
     private double LeftBackingField;
+    private readonly SynchronizationContext? syncContext;
 
     private void NewPositionNotification(object sender, IPosition e)
     {
-      Top = e.y; Left = e.x;
+      Debug.WriteLine($"ModelBall: received NewPositionNotification pos=({e.x},{e.y}) from senderHash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sender)}");
+
+      if (syncContext != null)
+      {
+        try
+        {
+          syncContext.Send(_ =>
+          {
+            Top = e.y;
+            Left = e.x;
+          }, null);
+        }
+        catch (System.Exception ex)
+        {
+          Debug.WriteLine($"ModelBall: syncContext.Send exception: {ex}");
+          Top = e.y;
+          Left = e.x;
+        }
+      }
+      else
+      {
+        Top = e.y;
+        Left = e.x;
+      }
     }
 
     private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
     {
+      Debug.WriteLine($"ModelBall: PropertyChanged {propertyName} Top={TopBackingField} Left={LeftBackingField}");
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 

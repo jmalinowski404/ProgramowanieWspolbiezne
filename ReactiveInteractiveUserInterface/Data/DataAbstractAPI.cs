@@ -25,9 +25,9 @@ namespace TP.ConcurrentProgramming.Data
 
     public abstract void Start(int numberOfBalls, Action<IVector, IBall> upperLayerHandler);
 
-    public abstract void Pause();
+    public virtual void Pause() { }
 
-    public abstract void Resume();
+    public virtual void Resume() { }
 
     #endregion public API
 
@@ -61,7 +61,8 @@ namespace TP.ConcurrentProgramming.Data
   {
     event EventHandler<IVector> NewPositionNotification;
 
-        IVector Position { get; }
+        IVector Position { get; set; }
         IVector Velocity { get; set; }
+        double Mass { get; }
     }
 }

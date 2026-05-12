@@ -2,14 +2,13 @@
 //
 //  Copyright (C) 2024, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community by pressing the `Watch` button and get started commenting using the discussion panel at
-//
-//  https://github.com/mpostol/TP/discussions/182
-//
-//_____________________________________________________________________________________________________________________________________
+//____________________________________________________________________________________________________________________________________
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace TP.ConcurrentProgramming.Data
 {
@@ -19,7 +18,9 @@ namespace TP.ConcurrentProgramming.Data
 
     public DataImplementation()
     {
-      MoveTimer = new Timer(Move, null, Timeout.Infinite, 25);
+      pauseEvent = new ManualResetEventSlim(true);
+      workers = new Dictionary<Ball, (Thread thread, CancellationTokenSource cts)>();
+      BallsList = new List<Ball>();
     }
 
     #endregion ctor
@@ -33,35 +34,50 @@ namespace TP.ConcurrentProgramming.Data
       if (upperLayerHandler == null)
         throw new ArgumentNullException(nameof(upperLayerHandler));
 
+      Debug.WriteLine($"DataImplementation.Start called. numberOfBalls={numberOfBalls}");
       Random random = new Random();
 
       for (int i = 0; i < numberOfBalls; i++)
       {
         Vector startingPosition = new(random.Next(100, 400 - 100), random.Next(100, 400 - 100));
         Vector startingVelocity = new Vector(random.Next(-5, 6), random.Next(-5, 6));
-        Ball newBall = new(startingPosition, startingVelocity);
-        upperLayerHandler(startingPosition, newBall);
-        BallsList.Add(newBall);
-      }
+        Ball newBall = new(startingPosition, startingVelocity, 5.0);
 
-      MoveTimer.Change(0, 25);
+        upperLayerHandler(startingPosition, newBall);
+
+        lock (BallsLock)
+        {
+          BallsList.Add(newBall);
+        }
+
+        var cts = new CancellationTokenSource();
+        Thread thread = new Thread(() => WorkerLoop(newBall, cts.Token))
+        {
+          IsBackground = true,
+          Name = $"BallWorker-{i}"
+        };
+        workers.Add(newBall, (thread, cts));
+        thread.Start();
+
+        Debug.WriteLine($"Created worker '{thread.Name}' id={thread.ManagedThreadId} hash={RuntimeHelpers.GetHashCode(newBall)}");
+      }
     }
 
     public override void Pause()
-        {
-            if (Disposed)
-               throw new ObjectDisposedException(nameof(DataImplementation));
-                
-            MoveTimer.Change(Timeout.Infinite, Timeout.Infinite);
-        }
+    {
+      if (Disposed)
+        throw new ObjectDisposedException(nameof(DataImplementation));
 
-        public override void Resume()
-        {
-            if (Disposed)
-               throw new ObjectDisposedException(nameof(DataImplementation));
+      pauseEvent.Reset();
+    }
 
-            MoveTimer.Change(0, 16);
-        }
+    public override void Resume()
+    {
+      if (Disposed)
+        throw new ObjectDisposedException(nameof(DataImplementation));
+
+      pauseEvent.Set();
+    }
 
     #endregion DataAbstractAPI
 
@@ -73,8 +89,40 @@ namespace TP.ConcurrentProgramming.Data
       {
         if (disposing)
         {
-          MoveTimer.Dispose();
-          BallsList.Clear();
+          Debug.WriteLine("DataImplementation.Dispose called - cancelling workers");
+          foreach (var entry in workers.Values)
+          {
+            try { entry.cts.Cancel(); }
+            catch { }
+          }
+
+          foreach (var entry in workers.Values)
+          {
+            try
+            {
+              if (entry.thread.IsAlive)
+                entry.thread.Join(200);
+            }
+            catch { }
+          }
+
+          foreach (var entry in workers.Values)
+          {
+            try { entry.cts.Dispose(); } catch { }
+          }
+
+          workers.Clear();
+
+          lock (BallsLock)
+          {
+            foreach (var b in BallsList)
+            {
+              try { /* nothing extra to do for Ball */ } catch { }
+            }
+            BallsList.Clear();
+          }
+
+          pauseEvent.Dispose();
         }
         Disposed = true;
       }
@@ -84,7 +132,6 @@ namespace TP.ConcurrentProgramming.Data
 
     public override void Dispose()
     {
-      // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
       Dispose(disposing: true);
       GC.SuppressFinalize(this);
     }
@@ -93,18 +140,43 @@ namespace TP.ConcurrentProgramming.Data
 
     #region private
 
-    //private bool disposedValue;
     private bool Disposed = false;
 
-    private readonly Timer MoveTimer;
-    private List<Ball> BallsList = [];
+    private List<Ball> BallsList;
+    private readonly object BallsLock = new();
+    private readonly ManualResetEventSlim pauseEvent;
+    private readonly Dictionary<Ball, (Thread thread, CancellationTokenSource cts)> workers;
 
-    private void Move(object? x)
+    private void WorkerLoop(Ball ball, CancellationToken ct)
     {
-            foreach (Ball item in BallsList)
-            {
-                item.Move(new Vector(item.Velocity.x, item.Velocity.y));
-            }
+      try
+      {
+        Debug.WriteLine($"Worker start: thread={Thread.CurrentThread.ManagedThreadId}, ballHash={RuntimeHelpers.GetHashCode(ball)}");
+        while (!ct.IsCancellationRequested)
+        {
+          pauseEvent.Wait(ct);
+
+          var v = ball.Velocity;
+          if (double.IsNaN(v.x) || double.IsNaN(v.y) || double.IsInfinity(v.x) || double.IsInfinity(v.y))
+          {
+            Debug.WriteLine($"Invalid velocity detected for ball {RuntimeHelpers.GetHashCode(ball)}: vx={v.x}, vy={v.y}");
+            ball.Velocity = new Vector(0, 0);
+          }
+
+          ball.Move(new Vector(ball.Velocity.x, ball.Velocity.y));
+
+          Thread.Sleep(25);
+        }
+        Debug.WriteLine($"Worker exiting normally: thread={Thread.CurrentThread.ManagedThreadId}, ballHash={RuntimeHelpers.GetHashCode(ball)}");
+      }
+      catch (OperationCanceledException)
+      {
+        Debug.WriteLine($"Worker cancelled: thread={Thread.CurrentThread.ManagedThreadId}, ballHash={RuntimeHelpers.GetHashCode(ball)}");
+      }
+      catch (Exception e)
+      {
+        Debug.WriteLine($"Ball worker exception: {e}");
+      }
     }
 
     #endregion private
@@ -114,13 +186,19 @@ namespace TP.ConcurrentProgramming.Data
     [Conditional("DEBUG")]
     internal void CheckBallsList(Action<IEnumerable<IBall>> returnBallsList)
     {
-      returnBallsList(BallsList);
+      lock (BallsLock)
+      {
+        returnBallsList(BallsList.ToArray());
+      }
     }
 
     [Conditional("DEBUG")]
     internal void CheckNumberOfBalls(Action<int> returnNumberOfBalls)
     {
-      returnNumberOfBalls(BallsList.Count);
+      lock (BallsLock)
+      {
+        returnNumberOfBalls(BallsList.Count);
+      }
     }
 
     [Conditional("DEBUG")]

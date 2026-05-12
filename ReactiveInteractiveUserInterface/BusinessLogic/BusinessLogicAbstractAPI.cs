@@ -29,9 +29,9 @@ namespace TP.ConcurrentProgramming.BusinessLogic
 
     public abstract void Start(int numberOfBalls, Action<IPosition, IBall> upperLayerHandler);
 
-    public abstract void Pause();
+    public virtual void Pause() { }
 
-    public abstract void Resume();
+    public virtual void Resume() { }
 
     #region IDisposable
 

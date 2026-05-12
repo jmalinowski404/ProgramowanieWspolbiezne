@@ -10,6 +10,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TP.ConcurrentProgramming.Presentation.Model;
@@ -28,7 +29,12 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
     internal MainWindowViewModel(ModelAbstractApi modelLayerAPI)
     {
       ModelLayer = modelLayerAPI == null ? ModelAbstractApi.CreateModel() : modelLayerAPI;
-      Observer = ModelLayer.Subscribe<ModelIBall>(x => Balls.Add(x));
+      Observer = ModelLayer.Subscribe<ModelIBall>(x =>
+      {
+        Debug.WriteLine("MainWindowViewModel: Observer received new ModelBall");
+        Balls.Add(x);
+        Debug.WriteLine($"MainWindowViewModel: Balls.Count = {Balls.Count}");
+      });
 
       StartCommand = new RelayCommand(StartSimulation);
        PauseCommand = new RelayCommand(PauseSimulation);
@@ -43,7 +49,6 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
       if (Disposed)
         throw new ObjectDisposedException(nameof(MainWindowViewModel));
       ModelLayer.Start(numberOfBalls);
-      Observer.Dispose();
     }
 
     public void Pause()
@@ -84,6 +89,7 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
 
     private void StartSimulation()
     {
+        Debug.WriteLine($"StartSimulation invoked. NumberOfBalls={NumberOfBalls}");
        Start(NumberOfBalls);
 
        IsRunning = true;
@@ -112,6 +118,7 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
 
     protected virtual void Dispose(bool disposing)
     {
+      Debug.WriteLine($"MainWindowViewModel.Dispose called disposing={disposing}");
       if (!Disposed)
       {
         if (disposing)

@@ -28,9 +28,9 @@ namespace TP.ConcurrentProgramming.Presentation.Model
 
     public abstract void Start(int numberOfBalls);
 
-    public abstract void Pause();
+    public virtual void Pause() { }
 
-    public abstract void Resume();
+    public virtual void Resume() { }
 
     #region IObservable
 
