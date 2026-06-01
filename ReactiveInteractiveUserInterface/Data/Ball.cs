@@ -32,14 +32,45 @@ namespace TP.ConcurrentProgramming.Data
     public event EventHandler<IVector>? NewPositionNotification;
 
     private IVector _velocity = new Vector(0, 0);
+    private IVector _position;
     private const double MaxSpeed = 20.0;
+    private readonly object _propertyLock = new object();
 
     public IVector Velocity
     {
-      get => _velocity;
-      set => _velocity = ClampVelocity(value);
+      get
+      {
+        lock (_propertyLock)
+        {
+          return _velocity;
+        }
+      }
+      set
+      {
+        lock (_propertyLock)
+        {
+          _velocity = ClampVelocity(value);
+        }
+      }
     }
-    public IVector Position { get; set; }
+
+    public IVector Position
+    {
+      get
+      {
+        lock (_propertyLock)
+        {
+          return _position;
+        }
+      }
+      set
+      {
+        lock (_propertyLock)
+        {
+          _position = value;
+        }
+      }
+    }
     public double Mass { get; set; }
 
     #endregion IBall
@@ -53,7 +84,10 @@ namespace TP.ConcurrentProgramming.Data
 
     public void Move(Vector delta)
     {
-      Position = new Vector(Position.x + delta.x, Position.y + delta.y);
+      lock (_propertyLock)
+      {
+        _position = new Vector(_position.x + delta.x, _position.y + delta.y);
+      }
       RaiseNewPositionChangeNotification();
     }
     private static IVector ClampVelocity(IVector v)

@@ -31,12 +31,10 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
       ModelLayer = modelLayerAPI == null ? ModelAbstractApi.CreateModel() : modelLayerAPI;
       Observer = ModelLayer.Subscribe<ModelIBall>(x =>
       {
-        Debug.WriteLine("MainWindowViewModel: Observer received new ModelBall");
         Balls.Add(x);
-        Debug.WriteLine($"MainWindowViewModel: Balls.Count = {Balls.Count}");
       });
 
-      StartCommand = new RelayCommand(StartSimulation);
+       StartCommand = new RelayCommand(StartSimulation);
        PauseCommand = new RelayCommand(PauseSimulation);
      }
 

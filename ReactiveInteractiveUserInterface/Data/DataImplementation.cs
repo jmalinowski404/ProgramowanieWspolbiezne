@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.IO;
 
 namespace TP.ConcurrentProgramming.Data
 {
@@ -123,6 +124,8 @@ namespace TP.ConcurrentProgramming.Data
           }
 
           pauseEvent.Dispose();
+
+          logger.Dispose();
         }
         Disposed = true;
       }
@@ -146,6 +149,7 @@ namespace TP.ConcurrentProgramming.Data
     private readonly object BallsLock = new();
     private readonly ManualResetEventSlim pauseEvent;
     private readonly Dictionary<Ball, (Thread thread, CancellationTokenSource cts)> workers;
+    private readonly Logger logger = new Logger();
 
     private void WorkerLoop(Ball ball, CancellationToken ct)
     {
@@ -164,6 +168,7 @@ namespace TP.ConcurrentProgramming.Data
           }
 
           ball.Move(new Vector(ball.Velocity.x, ball.Velocity.y));
+          logger.LogDiagnosticData(RuntimeHelpers.GetHashCode(ball), ball.Position.x, ball.Position.y, v.x, v.y);
 
           Thread.Sleep(25);
         }
