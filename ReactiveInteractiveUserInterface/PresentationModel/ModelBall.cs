@@ -67,30 +67,20 @@ namespace TP.ConcurrentProgramming.Presentation.Model
 
     private void NewPositionNotification(object sender, IPosition e)
     {
-      Debug.WriteLine($"ModelBall: received NewPositionNotification pos=({e.x},{e.y}) from senderHash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sender)}");
-
-      if (syncContext != null)
-      {
-        try
+      
+        if (syncContext != null)
         {
-          syncContext.Send(_ =>
-          {
+            syncContext.Post(_ =>
+            {
+                Top = e.y;
+                Left = e.x;
+            }, null);
+        }
+        else
+        {
             Top = e.y;
             Left = e.x;
-          }, null);
         }
-        catch (System.Exception ex)
-        {
-          Debug.WriteLine($"ModelBall: syncContext.Send exception: {ex}");
-          Top = e.y;
-          Left = e.x;
-        }
-      }
-      else
-      {
-        Top = e.y;
-        Left = e.x;
-      }
     }
 
     private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
