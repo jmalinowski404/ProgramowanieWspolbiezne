@@ -38,7 +38,7 @@ namespace TP.ConcurrentProgramming.Data
             };
 
             string json = JsonSerializer.Serialize(logEntry);
-            _logQueue.Add(json);
+            _logQueue.TryAdd(json);
         }
 
         private async Task WriteLogsAsync()
