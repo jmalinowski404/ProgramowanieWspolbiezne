@@ -35,7 +35,6 @@ namespace TP.ConcurrentProgramming.Data
       if (upperLayerHandler == null)
         throw new ArgumentNullException(nameof(upperLayerHandler));
 
-      Debug.WriteLine($"DataImplementation.Start called. numberOfBalls={numberOfBalls}");
       Random random = new Random();
 
       for (int i = 0; i < numberOfBalls; i++)
@@ -51,6 +50,8 @@ namespace TP.ConcurrentProgramming.Data
           BallsList.Add(newBall);
         }
 
+
+
         var cts = new CancellationTokenSource();
         Thread thread = new Thread(() => WorkerLoop(newBall, cts.Token))
         {
@@ -59,8 +60,6 @@ namespace TP.ConcurrentProgramming.Data
         };
         workers.Add(newBall, (thread, cts));
         thread.Start();
-
-        Debug.WriteLine($"Created worker '{thread.Name}' id={thread.ManagedThreadId} hash={RuntimeHelpers.GetHashCode(newBall)}");
       }
     }
 
@@ -155,24 +154,42 @@ namespace TP.ConcurrentProgramming.Data
     {
       try
       {
-        Debug.WriteLine($"Worker start: thread={Thread.CurrentThread.ManagedThreadId}, ballHash={RuntimeHelpers.GetHashCode(ball)}");
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
         while (!ct.IsCancellationRequested)
         {
           pauseEvent.Wait(ct);
 
+          if (!stopwatch.IsRunning)
+          {
+                stopwatch.Restart();
+                Thread.Sleep(25);
+                continue;
+          }
+
+          double deltaTime = stopwatch.Elapsed.TotalSeconds;
+          stopwatch.Restart();
+
+          if (deltaTime > 0.05)
+            deltaTime = 0.05;
+
+
           var v = ball.Velocity;
           if (double.IsNaN(v.x) || double.IsNaN(v.y) || double.IsInfinity(v.x) || double.IsInfinity(v.y))
           {
-            Debug.WriteLine($"Invalid velocity detected for ball {RuntimeHelpers.GetHashCode(ball)}: vx={v.x}, vy={v.y}");
             ball.Velocity = new Vector(0, 0);
+            v = ball.Velocity;
           }
 
-          ball.Move(new Vector(ball.Velocity.x, ball.Velocity.y));
+          double speedMulti = 50.0;
+          Vector deltaMove = new Vector(v.x * deltaTime * speedMulti, v.y * deltaTime * speedMulti);
+
+          ball.Move(deltaMove);
           logger.LogDiagnosticData(RuntimeHelpers.GetHashCode(ball), ball.Position.x, ball.Position.y, v.x, v.y);
 
           Thread.Sleep(25);
         }
-        Debug.WriteLine($"Worker exiting normally: thread={Thread.CurrentThread.ManagedThreadId}, ballHash={RuntimeHelpers.GetHashCode(ball)}");
       }
       catch (OperationCanceledException)
       {

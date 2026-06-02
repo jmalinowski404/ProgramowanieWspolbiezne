@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\data\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|solutionrelative:reactiveinteractiveuserinterface\\data\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\data\\dataimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|solutionrelative:reactiveinteractiveuserinterface\\data\\dataimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\data\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|solutionrelative:reactiveinteractiveuserinterface\\data\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\data\\dataimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|solutionrelative:reactiveinteractiveuserinterface\\data\\dataimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2380645-D767-4E38-835A-3CA87C22CD20}|ReactiveInteractiveUserInterface\\PresentationViewModel\\PresentationViewModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationviewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2380645-D767-4E38-835A-3CA87C22CD20}|ReactiveInteractiveUserInterface\\PresentationViewModel\\PresentationViewModel.csproj|solutionrelative:reactiveinteractiveuserinterface\\presentationviewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationmodel\\modelball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|solutionrelative:reactiveinteractiveuserinterface\\presentationmodel\\modelball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8760446B-8BD6-4254-9977-475EAEE45B0B}|ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicTest.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\businesslogictest\\businessballunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8760446B-8BD6-4254-9977-475EAEE45B0B}|ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicTest.csproj|solutionrelative:reactiveinteractiveuserinterface\\businesslogictest\\businessballunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE3CC0CD-F262-4122-B7C7-F37EEB8F3C48}|ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessLogic.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\businesslogic\\businesslogicimplementation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,28 +31,8 @@
       "RelativeMoniker": "D:0:0:{8760446B-8BD6-4254-9977-475EAEE45B0B}|ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicTest.csproj|solutionrelative:reactiveinteractiveuserinterface\\businesslogictest\\businesslogicunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationmodel\\modelabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|solutionrelative:reactiveinteractiveuserinterface\\presentationmodel\\modelabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8760446B-8BD6-4254-9977-475EAEE45B0B}|ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicTest.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\businesslogictest\\businessballunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8760446B-8BD6-4254-9977-475EAEE45B0B}|ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicTest.csproj|solutionrelative:reactiveinteractiveuserinterface\\businesslogictest\\businessballunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BE3CC0CD-F262-4122-B7C7-F37EEB8F3C48}|ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessLogic.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\businesslogic\\businesslogicabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE3CC0CD-F262-4122-B7C7-F37EEB8F3C48}|ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessLogic.csproj|solutionrelative:reactiveinteractiveuserinterface\\businesslogic\\businesslogicabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\data\\dataabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3AA27DB8-F9C6-4587-8290-0FC0FEC69AC2}|ReactiveInteractiveUserInterface\\Data\\Data.csproj|solutionrelative:reactiveinteractiveuserinterface\\data\\dataabstractapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationmodel\\modelball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|solutionrelative:reactiveinteractiveuserinterface\\presentationmodel\\modelball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2380645-D767-4E38-835A-3CA87C22CD20}|ReactiveInteractiveUserInterface\\PresentationViewModel\\PresentationViewModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationviewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2380645-D767-4E38-835A-3CA87C22CD20}|ReactiveInteractiveUserInterface\\PresentationViewModel\\PresentationViewModel.csproj|solutionrelative:reactiveinteractiveuserinterface\\presentationviewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B39E905-6C7C-4F2B-BD7A-77B7E3893F59}|ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.csproj|c:\\users\\kuba\\source\\repos\\projekt_pgw\\reactiveinteractiveuserinterface\\presentationmodel\\presentationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -70,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,27 +70,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BusinessBallUnitTest.cs",
-              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
-              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
-              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
-              "RelativeToolTip": "ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MainWindowViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
+              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
+              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
+              "RelativeToolTip": "ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAiwDgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T22:48:31.725Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Ball.cs",
-              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\Ball.cs",
-              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\Data\\Ball.cs",
-              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\Ball.cs*",
-              "RelativeToolTip": "ReactiveInteractiveUserInterface\\Data\\Ball.cs*",
-              "ViewState": "AgIAACMAAAAAAAAAAAA1wDUAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T21:11:50.309Z",
+              "WhenOpened": "2026-06-02T22:42:05.435Z",
               "EditorCaption": ""
             },
             {
@@ -119,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 8,
               "Title": "PresentationModel.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\PresentationModel\\PresentationModel.cs",
@@ -131,27 +107,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "ModelBall.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\ModelBall.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\PresentationModel\\ModelBall.cs",
               "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\ModelBall.cs",
               "RelativeToolTip": "ReactiveInteractiveUserInterface\\PresentationModel\\ModelBall.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAArwFIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAmwHMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T22:19:01.791Z"
+              "WhenOpened": "2026-05-12T22:19:01.791Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "DataImplementation.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\DataImplementation.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\Data\\DataImplementation.cs",
               "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\DataImplementation.cs",
               "RelativeToolTip": "ReactiveInteractiveUserInterface\\Data\\DataImplementation.cs",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAqwJcAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAmwLYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T07:24:56.249Z"
+              "WhenOpened": "2026-04-22T07:24:56.249Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -161,14 +139,14 @@
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\Data\\Logger.cs",
               "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\Logger.cs",
               "RelativeToolTip": "ReactiveInteractiveUserInterface\\Data\\Logger.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAiwC4AAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAWwCAAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-01T20:59:33.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "BusinessLogicUnitTest.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicUnitTest.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessLogicUnitTest.cs",
@@ -180,31 +158,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DataAbstractAPI.cs",
-              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\DataAbstractAPI.cs",
-              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\Data\\DataAbstractAPI.cs",
-              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\DataAbstractAPI.cs",
-              "RelativeToolTip": "ReactiveInteractiveUserInterface\\Data\\DataAbstractAPI.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAA2wC4AAAAaAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "BusinessBallUnitTest.cs",
+              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
+              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
+              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
+              "RelativeToolTip": "ReactiveInteractiveUserInterface\\BusinessLogicTest\\BusinessBallUnitTest.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T07:24:43.358Z"
+              "WhenOpened": "2026-05-12T22:48:31.725Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ModelAbstractApi.cs",
-              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\ModelAbstractApi.cs",
-              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\PresentationModel\\ModelAbstractApi.cs",
-              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationModel\\ModelAbstractApi.cs",
-              "RelativeToolTip": "ReactiveInteractiveUserInterface\\PresentationModel\\ModelAbstractApi.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAcwCAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T07:19:11.276Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "BusinessLogicImplementation.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessLogicImplementation.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessLogicImplementation.cs",
@@ -216,19 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MainWindowViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
-              "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
-              "ToolTip": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
-              "RelativeToolTip": "ReactiveInteractiveUserInterface\\PresentationViewModel\\MainWindowViewModel.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAwwBIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T07:17:19.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 9,
               "Title": "BusinessBall.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessBall.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\BusinessLogic\\BusinessBall.cs",
@@ -240,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 10,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\GraphicalUserInterface\\MainWindow.xaml",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\GraphicalUserInterface\\MainWindow.xaml",
@@ -251,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 11,
               "Title": "Vector.cs",
               "DocumentMoniker": "C:\\Users\\Kuba\\source\\repos\\Projekt_PGW\\ReactiveInteractiveUserInterface\\Data\\Vector.cs",
               "RelativeDocumentMoniker": "ReactiveInteractiveUserInterface\\Data\\Vector.cs",
