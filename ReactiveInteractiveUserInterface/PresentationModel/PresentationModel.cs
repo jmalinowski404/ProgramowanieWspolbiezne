@@ -100,7 +100,6 @@ namespace TP.ConcurrentProgramming.Presentation.Model
           }
           catch (Exception e)
           {
-            Debug.WriteLine($"StartHandler UI-post exception: {e}");
           }
         }, null);
       }
@@ -114,7 +113,6 @@ namespace TP.ConcurrentProgramming.Presentation.Model
         }
         catch (Exception e)
         {
-          Debug.WriteLine($"StartHandler direct exception: {e}");
         }
       }
     }

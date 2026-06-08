@@ -64,5 +64,6 @@ namespace TP.ConcurrentProgramming.Data
         IVector Position { get; set; }
         IVector Velocity { get; set; }
         double Mass { get; }
+        string Color { get; }
     }
 }

@@ -30,7 +30,6 @@ namespace TP.ConcurrentProgramming.BusinessLogic
 
     public override void Dispose()
     {
-      Debug.WriteLine("BusinessLogicImplementation.Dispose called");
       if (Disposed)
         throw new ObjectDisposedException(nameof(BusinessLogicImplementation));
       layerBellow.Dispose();
@@ -102,7 +101,6 @@ namespace TP.ConcurrentProgramming.BusinessLogic
       double ballDiameter = 20.0;
       double ballRadius = ballDiameter / 2.0;
 
-      // snapshot under lock to avoid collection-modified exceptions
       Data.IBall[] snapshot;
       lock (logicBallsLock)
       {
@@ -151,15 +149,27 @@ namespace TP.ConcurrentProgramming.BusinessLogic
         }
       }
 
-      if (ball.Position.x <= 0 || ball.Position.x >= boardWidth - ballDiameter)
-      {
-        ball.Velocity = new Data.Vector(-ball.Velocity.x, ball.Velocity.y);
-      }
+      if (ball.Position.x <= 0)
+        {
+          ball.Position = new Data.Vector(0, ball.Position.y); 
+          ball.Velocity = new Data.Vector(Math.Abs(ball.Velocity.x), ball.Velocity.y);
+        }
+        else if (ball.Position.x >= boardWidth - ballDiameter)
+        {
+          ball.Position = new Data.Vector(boardWidth - ballDiameter, ball.Position.y);
+          ball.Velocity = new Data.Vector(-Math.Abs(ball.Velocity.x), ball.Velocity.y);
+        }
 
-      if (ball.Position.y <= 0 || ball.Position.y >= boardHeight - ballDiameter)
-      {
-        ball.Velocity = new Data.Vector(ball.Velocity.x, -ball.Velocity.y);
-      }
+        if (ball.Position.y <= 0)
+        {
+          ball.Position = new Data.Vector(ball.Position.x, 0);
+          ball.Velocity = new Data.Vector(ball.Velocity.x, Math.Abs(ball.Velocity.y));
+        }
+        else if (ball.Position.y >= boardHeight - ballDiameter)
+        {
+          ball.Position = new Data.Vector(ball.Position.x, boardHeight - ballDiameter);
+          ball.Velocity = new Data.Vector(ball.Velocity.x, -Math.Abs(ball.Velocity.y));
+        }
     }
 
     private void ProcessCollision(Data.IBall ball, Data.IBall otherBall, double ballRadius, double ballDiameter, double boardWidth, double boardHeight)

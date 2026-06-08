@@ -16,26 +16,25 @@ namespace TP.ConcurrentProgramming.BusinessLogic
   {
     public Ball(Data.IBall ball)
     {
+            _dataBall = ball;
             ball.NewPositionNotification += (sender, newPosition) =>
             {
-                Debug.WriteLine($"BusinessBall: Data->Business event for dataHash={System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(sender)} pos=({newPosition.x},{newPosition.y})");
-        
                 RaisePositionChangeEvent(this, newPosition);
             };
     }
 
     #region IBall
 
+    public string Color => _dataBall.Color;
     public event EventHandler<IPosition>? NewPositionNotification;
 
     #endregion IBall
 
     #region private
+    private readonly Data.IBall _dataBall;
 
     private void RaisePositionChangeEvent(object? sender, Data.IVector e)
     {
-      Debug.WriteLine($"BusinessBall: Raising Business NewPositionNotification pos=({e.x},{e.y})");
-      
       NewPositionNotification?.Invoke(this, new Position(e.x, e.y));
     }
 

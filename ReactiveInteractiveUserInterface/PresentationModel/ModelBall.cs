@@ -19,6 +19,7 @@ namespace TP.ConcurrentProgramming.Presentation.Model
     {
       TopBackingField = top;
       LeftBackingField = left;
+      _underneathBall = underneathBall;
       syncContext = SynchronizationContext.Current;
       underneathBall.NewPositionNotification += NewPositionNotification;
     }
@@ -49,7 +50,19 @@ namespace TP.ConcurrentProgramming.Presentation.Model
       }
     }
 
-    public double Diameter { get; init; } = 0;
+    public string Color
+    {
+      get { return ColorBackingField; }
+      private set
+      {
+        if (ColorBackingField == value)
+          return;
+        ColorBackingField = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public double Diameter { get; init; } = 20.0;
 
     #region INotifyPropertyChanged
 
@@ -63,29 +76,40 @@ namespace TP.ConcurrentProgramming.Presentation.Model
 
     private double TopBackingField;
     private double LeftBackingField;
+    private string ColorBackingField = "Blue";
+    private readonly LogicIBall _underneathBall;
     private readonly SynchronizationContext? syncContext;
 
     private void NewPositionNotification(object sender, IPosition e)
     {
-      
-        if (syncContext != null)
+      if (syncContext != null)
+      {
+        try
         {
-            syncContext.Post(_ =>
-            {
-                Top = e.y;
-                Left = e.x;
-            }, null);
-        }
-        else
-        {
+          syncContext.Post(_ =>
+          {
             Top = e.y;
             Left = e.x;
+            Color = _underneathBall.Color;
+          }, null);
         }
+        catch (System.Exception ex)
+        {
+          Top = e.y;
+          Left = e.x;
+          Color = _underneathBall.Color;
+        }
+      }
+      else
+      {
+        Top = e.y;
+        Left = e.x;
+        Color = _underneathBall.Color;
+      }
     }
 
     private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
     {
-      Debug.WriteLine($"ModelBall: PropertyChanged {propertyName} Top={TopBackingField} Left={LeftBackingField}");
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 

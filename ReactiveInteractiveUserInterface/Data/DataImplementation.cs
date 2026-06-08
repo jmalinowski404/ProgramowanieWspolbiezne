@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.IO;
+using System.Timers;
 
 namespace TP.ConcurrentProgramming.Data
 {
@@ -22,6 +23,37 @@ namespace TP.ConcurrentProgramming.Data
       pauseEvent = new ManualResetEventSlim(true);
       workers = new Dictionary<Ball, (Thread thread, CancellationTokenSource cts)>();
       BallsList = new List<Ball>();
+
+      timer = new System.Timers.Timer(25);
+      SetupMasterTimer();
+    }
+
+    private void SetupMasterTimer() {
+        Random random = new Random();
+
+        timer.Elapsed += (sender, e) =>
+        {
+            if (!pauseEvent.IsSet) return;
+
+            tickCounter++;
+
+            if (tickCounter >= 40)
+            {
+                tickCounter = 0;
+
+                string randomColor = availableColors[random.Next(availableColors.Length)];
+
+                lock (BallsLock)
+                {
+                    foreach (var ball in BallsList)
+                    {
+                        ball.ChangeColorAndNotify(randomColor);
+                    }
+                }
+
+                logger.LogGlobalEvent($"Color: {randomColor}");
+            }
+        };
     }
 
     #endregion ctor
@@ -37,6 +69,8 @@ namespace TP.ConcurrentProgramming.Data
 
       Random random = new Random();
 
+      List<Thread> threadsToStart = new List<Thread>();
+
       for (int i = 0; i < numberOfBalls; i++)
       {
         Vector startingPosition = new(random.Next(100, 400 - 100), random.Next(100, 400 - 100));
@@ -50,8 +84,6 @@ namespace TP.ConcurrentProgramming.Data
           BallsList.Add(newBall);
         }
 
-
-
         var cts = new CancellationTokenSource();
         Thread thread = new Thread(() => WorkerLoop(newBall, cts.Token))
         {
@@ -59,8 +91,15 @@ namespace TP.ConcurrentProgramming.Data
           Name = $"BallWorker-{i}"
         };
         workers.Add(newBall, (thread, cts));
-        thread.Start();
+        threadsToStart.Add(thread);
       }
+
+      foreach (var t in threadsToStart)
+      {
+         t.Start();
+      }
+
+      timer.Start();
     }
 
     public override void Pause()
@@ -68,6 +107,8 @@ namespace TP.ConcurrentProgramming.Data
       if (Disposed)
         throw new ObjectDisposedException(nameof(DataImplementation));
 
+        
+      timer.Stop();
       pauseEvent.Reset();
     }
 
@@ -76,6 +117,7 @@ namespace TP.ConcurrentProgramming.Data
       if (Disposed)
         throw new ObjectDisposedException(nameof(DataImplementation));
 
+      timer.Start();
       pauseEvent.Set();
     }
 
@@ -89,7 +131,6 @@ namespace TP.ConcurrentProgramming.Data
       {
         if (disposing)
         {
-          Debug.WriteLine("DataImplementation.Dispose called - cancelling workers");
           foreach (var entry in workers.Values)
           {
             try { entry.cts.Cancel(); }
@@ -124,6 +165,9 @@ namespace TP.ConcurrentProgramming.Data
 
           pauseEvent.Dispose();
 
+          timer.Stop();
+          timer.Dispose();
+
           logger.Dispose();
         }
         Disposed = true;
@@ -149,44 +193,25 @@ namespace TP.ConcurrentProgramming.Data
     private readonly ManualResetEventSlim pauseEvent;
     private readonly Dictionary<Ball, (Thread thread, CancellationTokenSource cts)> workers;
     private readonly Logger logger = new Logger();
+    private System.Timers.Timer timer;
+    private int tickCounter = 0;
+    private readonly string[] availableColors = { "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Magenta", "Cyan" };
 
     private void WorkerLoop(Ball ball, CancellationToken ct)
     {
       try
       {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-
         while (!ct.IsCancellationRequested)
         {
           pauseEvent.Wait(ct);
-
-          if (!stopwatch.IsRunning)
-          {
-                stopwatch.Restart();
-                Thread.Sleep(25);
-                continue;
-          }
-
-          double deltaTime = stopwatch.Elapsed.TotalSeconds;
-          stopwatch.Restart();
-
-          if (deltaTime > 0.05)
-            deltaTime = 0.05;
-
 
           var v = ball.Velocity;
           if (double.IsNaN(v.x) || double.IsNaN(v.y) || double.IsInfinity(v.x) || double.IsInfinity(v.y))
           {
             ball.Velocity = new Vector(0, 0);
-            v = ball.Velocity;
           }
 
-          double speedMulti = 50.0;
-          Vector deltaMove = new Vector(v.x * deltaTime * speedMulti, v.y * deltaTime * speedMulti);
-
-          ball.Move(deltaMove);
-          logger.LogDiagnosticData(RuntimeHelpers.GetHashCode(ball), ball.Position.x, ball.Position.y, v.x, v.y);
+          ball.Move(new Vector(ball.Velocity.x, ball.Velocity.y));
 
           Thread.Sleep(25);
         }

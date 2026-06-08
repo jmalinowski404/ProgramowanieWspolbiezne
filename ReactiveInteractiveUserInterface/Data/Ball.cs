@@ -35,6 +35,7 @@ namespace TP.ConcurrentProgramming.Data
     private IVector _position;
     private const double MaxSpeed = 20.0;
     private readonly object _propertyLock = new object();
+    private string _color = "Red";
 
     public IVector Velocity
     {
@@ -73,6 +74,20 @@ namespace TP.ConcurrentProgramming.Data
     }
     public double Mass { get; set; }
 
+    public string Color {
+        get {
+            lock (_propertyLock) {
+                return _color;
+            }
+        }
+
+        set {
+            lock (_propertyLock) {
+                _color = value;
+            }
+        }
+    }
+
     #endregion IBall
 
     #region private
@@ -80,6 +95,15 @@ namespace TP.ConcurrentProgramming.Data
     private void RaiseNewPositionChangeNotification()
     {
       NewPositionNotification?.Invoke(this, Position);
+    }
+
+    public void ChangeColorAndNotify(string newColor)
+    {
+        lock (_propertyLock)
+        {
+            _color = newColor;
+        }
+        RaiseNewPositionChangeNotification();
     }
 
     public void Move(Vector delta)

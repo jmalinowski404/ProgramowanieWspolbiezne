@@ -87,7 +87,6 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
 
     private void StartSimulation()
     {
-        Debug.WriteLine($"StartSimulation invoked. NumberOfBalls={NumberOfBalls}");
        Start(NumberOfBalls);
 
        IsRunning = true;
@@ -116,7 +115,6 @@ namespace TP.ConcurrentProgramming.Presentation.ViewModel
 
     protected virtual void Dispose(bool disposing)
     {
-      Debug.WriteLine($"MainWindowViewModel.Dispose called disposing={disposing}");
       if (!Disposed)
       {
         if (disposing)

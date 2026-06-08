@@ -66,6 +66,7 @@ namespace TP.ConcurrentProgramming.BusinessLogic
 
   public interface IBall
     {
+    string Color { get; }
     event EventHandler<IPosition> NewPositionNotification;
   }
 }
